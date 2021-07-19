@@ -19,7 +19,10 @@
 
 const trimPostsContent = (posts) => {
   // start
-  
+  for (const post of posts) {
+    post[0] = `${post[0].substring(0, 20)}...`;
+    post[1] = `${post[1].substring(0, 40)}...`;
+  }
   return posts;
 
   // end
@@ -41,7 +44,7 @@ const renderPosts = (posts) => {
 };
 
 fetch('https://jsonplaceholder.typicode.com/posts')
-  .then(response => response.json())
-  .then(posts => posts.map(post => [post.title, post.body]))
+  .then((response) => response.json())
+  .then((posts) => posts.map((post) => [post.title, post.body]))
   .then(trimPostsContent)
   .then(renderPosts);
